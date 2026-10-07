@@ -1,0 +1,22 @@
+{
+  "name": "iloveZzz",
+  "owner": {
+    "name": "iloveZzz",
+    "url": "https://github.com/iloveZzz"
+  },
+  "description": "YSS engineering skills for Claude Code.",
+  "plugins": [
+    {
+      "name": "yss-harness-upgrade",
+      "source": "./",
+      "description": "YSS Go CLI installation, project initialization, sync, migration, and recovery skill.",
+      "category": "engineering",
+      "keywords": [
+        "yss",
+        "cli",
+        "harness",
+        "upgrade"
+      ]
+    }
+  ]
+}

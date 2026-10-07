@@ -1,0 +1,22 @@
+{
+  "name": "yss-harness-upgrade",
+  "version": "1.0.0",
+  "description": "YSS Go CLI 安装、初始化与升级维护技能，支持工程新建、接管、模板同步、旧实例迁移、资源补装、诊断和事务恢复回退。",
+  "author": {
+    "name": "iloveZzz",
+    "url": "https://github.com/iloveZzz"
+  },
+  "homepage": "https://github.com/iloveZzz/yss-harness-upgrade-skill",
+  "repository": "https://github.com/iloveZzz/yss-harness-upgrade-skill",
+  "license": "MIT",
+  "keywords": [
+    "yss",
+    "skills",
+    "cli",
+    "harness",
+    "upgrade"
+  ],
+  "skills": [
+    "./skills/yss-harness-upgrade"
+  ]
+}
