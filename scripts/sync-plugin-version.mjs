@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copies package.json's version into .claude-plugin/plugin.json.
+// Copies package.json's version into the plugin manifest and npm lockfile.
 // Runs as part of `npm run version`, immediately after `changeset version`.
 // With --check it changes nothing and exits 1 if the two versions differ.
 
@@ -13,15 +13,17 @@ const pluginPath = join(repo, ".claude-plugin", "plugin.json");
 const { version } = JSON.parse(readFileSync(join(repo, "package.json"), "utf8"));
 const source = readFileSync(pluginPath, "utf8");
 const plugin = JSON.parse(source);
+const lockPath = join(repo, "package-lock.json");
+const lock = JSON.parse(readFileSync(lockPath, "utf8"));
 
-if (plugin.version === version) {
-  console.log(`plugin.json version is ${version} (already in sync)`);
+if (plugin.version === version && lock.version === version && lock.packages[""].version === version) {
+  console.log(`Plugin and npm lockfile versions are ${version} (already in sync)`);
   process.exit(0);
 }
 
 if (process.argv.includes("--check")) {
   console.error(
-    `plugin.json version is ${plugin.version}, package.json is ${version}. Run \`node scripts/sync-plugin-version.mjs\`.`,
+    `Version mismatch: package=${version}, plugin=${plugin.version}, lock=${lock.version}/${lock.packages[""].version}. Run \`node scripts/sync-plugin-version.mjs\`.`,
   );
   process.exit(1);
 }
@@ -38,4 +40,8 @@ if (JSON.parse(updated).version !== version) {
 }
 
 writeFileSync(pluginPath, updated);
+lock.version = version;
+lock.packages[""].version = version;
+writeFileSync(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
 console.log(`plugin.json version ${plugin.version} -> ${version}`);
+console.log(`npm lockfile version -> ${version}`);

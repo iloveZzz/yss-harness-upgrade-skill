@@ -1,0 +1,24 @@
+{
+  "format_version": 1,
+  "source": {
+    "repository": "iloveZzz/yss-spec-project-template",
+    "base_commit": "58ded6b9cc133524f40d42d77cf43a275335b37b",
+    "source_state": "working-tree",
+    "canonical_root": ".agents/skills/setup-yss-harness",
+    "files_sha256": {
+      "SKILL.md": "2ef9fb99549739e7a32bca588ecf2a9e72ab242d5a405a8e111f2d217798f9e2",
+      "references/cli-families.md": "2e2cc1f1968ba3c29e69c6eb968e99dfef35d5805246c068209daf42110b071b",
+      "references/operation-contract.md": "f34e7b5436a260f7685c93b9efffb80003e171bbfd208e89c7fede6c6fea6d02",
+      "references/program-installation.md": "fe652944bb28af49a828a7b21ba1b115546d6622826efa0f489f333abf418f3c",
+      "references/project-operations.md": "0b840555c828d850fd5ca0133e68d509468d62587d70cd9c49b6871abbc7858b"
+    }
+  },
+  "skill": "setup-yss-harness",
+  "files_sha256": {
+    "SKILL.md": "1e1fe9a3f1d925ed11e6a406969df420ab9345911f45ed13dea7bd4c8608baae",
+    "references/cli-families.md": "2e2cc1f1968ba3c29e69c6eb968e99dfef35d5805246c068209daf42110b071b",
+    "references/operation-contract.md": "f34e7b5436a260f7685c93b9efffb80003e171bbfd208e89c7fede6c6fea6d02",
+    "references/program-installation.md": "fe652944bb28af49a828a7b21ba1b115546d6622826efa0f489f333abf418f3c",
+    "references/project-operations.md": "0b840555c828d850fd5ca0133e68d509468d62587d70cd9c49b6871abbc7858b"
+  }
+}

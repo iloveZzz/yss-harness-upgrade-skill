@@ -1,6 +1,20 @@
+<!-- Generated from .template-spec/process/harness-upgrade.md by .template-source/scripts/sync-harness-upgrade.mjs; edit the source protocol. -->
+
 # YSS 安装、初始化与升级维护协议
 
-本协议定义 YSS Go CLI 安装与升级、四 Profile 治理工程新建与接管、同家族实例同步、旧四 CLI 显式迁移、资源补装及事务恢复回退。`yss-harness-upgrade` 负责分流、来源核验、冲突处置和授权范围；执行器负责保存计划、输入校验、受管基线和事务。历史批准及 Ticket 状态仍由各自权威协议管理。
+本协议定义 YSS Go CLI 安装与升级、四 Profile 治理工程新建与接管、同家族实例同步、旧四 CLI 显式迁移、资源补装及事务恢复回退。`setup-yss-harness` 负责分流、来源核验、冲突处置和授权范围；执行器负责保存计划、输入校验、受管基线和事务。历史批准及 Ticket 状态仍由各自权威协议管理。
+
+## Setup 目标与环境分流
+
+用户指定工程并要求 `setup` 时，`setup-yss-harness` 在有效授权内完成 CLI 就绪与受管模板对齐所选固定版本；用户仅要求程序安装或升级时执行程序分支。程序和项目分别取证、规划、应用及验收，不逐步重复确认已有决定。新建或接管的用途、Profile 或实质取舍缺失时先调查，再补决定。
+
+已有合法身份沿用登记 Profile；没有身份时按用途推荐 `spec/design/backend/frontend`，不能用框架或目录名猜 Profile。原生实例走 `sync`，可识别旧实例走 `migrate`，普通工程走 `attach`，空目标走 `init`；模板源、矛盾身份、既有实例缺必需身份或未知 schema 的项目分支只诊断。插件绑定始终消费对应公开接口。
+
+可定制资产的政策允许处置能保留本地定制且不引入新业务决定时，Agent 可形成候选及绑定决议，再重新规划和验证；干净合并也需合法决议。无法证明保留定制、存在实质取舍或新增业务决定时展示差异并询问。固定来源资产、生成锁、身份与 binding 仍遵守下文各自规则。
+
+程序已经成功而项目失败时保留已验证 CLI；项目事务恢复自身，分别报告安装、项目和恢复结果。整体 setup 仅在全部适用操作与验收通过时完成，部分成功报告未完成。
+
+技能支持用户级独立安装，其必需说明和协议参考由 canonical 来源生成并随包携带。协议的可安装参考由 `.template-source/scripts/sync-harness-upgrade.mjs` 从本文件生成；生成副本不成为新事实源。项目分发和独立包使用同一技能身份。源码更名不改变已发布 Bundle，读取旧 Bundle 时以实际能力与标识为准；历史包和既有实例按明确升级或迁移更新。
 
 ## 程序来源与安装
 
@@ -40,6 +54,10 @@
 
 命令均可用 `--json` 消费 `outputVersion`、`protocolVersion`、`command`、`profile`、`status`、`code`、`result` 的版本化 envelope。成功须同时观察实际退出 0、`status=ok`、`code=OK`。计划、metadata、Bundle 和输出 envelope 各有自己的 schema，不把旧成功 JSON 当原生协议。
 
+本次升级接口采用计划 v2、metadata v3 和 Bundle v3；输出 envelope 和运行协议保持 v1。新执行器可识别历史 metadata 和事务材料；旧保存计划可读取诊断，应用返回 `PLAN_VERSION`，必须重新生成。旧 Bundle v1/v2 只提供已有分发来源，不授予删除或改名规则。
+
+`attach` 先识别身份，再选择资源。无 metadata 的普通工程生成首次接管计划；原生实例返回 `SYNC_REQUIRED` 并给出 `sync` 命令，可识别旧实例返回 `MIGRATION_REQUIRED`。身份矛盾、未知 schema 或未完成事务须先诊断或恢复，不能以 `--full` 重新接管。
+
 计划推荐保存到项目外全新普通文件；原生也允许专用 `.yss/plans/`。业务目录、Git 内部目录、链接别名及已有输出文件不能用作计划覆盖目标。目标模板来自固定二进制内的 Bundle，不另拉模板 main；项目 apply 不查询 `latest` 或执行计划提供的外部脚本。`bundle export --profile <Profile> --out <项目外新目录> --json` 可独立读取完整资产与 manifest。治理工程初始化及资源补装不授予产品阶段批准或生产脚手架权限，工程接入与生成仍消费相应生命周期合同。
 
 ## 插件绑定
@@ -52,17 +70,33 @@
 
 保存计划绑定命令、绝对项目根、Profile、协议、目标模板提交、快照摘要、变量、资源选择、binding、输入描述、变更前后字节及 mode 和整体摘要。应用使用相同固定二进制，重新核验输入并重建候选；手改计划或重算摘要不能替代合法规划，计划摘要也不授予权限。
 
-原生 metadata 保存受管基线与已应用状态。符合基线的受管文件可更新；用户修改、未知基线或不能证明权限来源的旧受管文件进入冲突，不能自动覆盖。旧 metadata 在迁移事务中按原字节保留。唯一根 `CONTEXT.md`、业务资产、用户 `.github`、Git HEAD/index/gitlink、文件类型与权限按执行器既有保护规则保留。
+metadata v3 按文件分别记录模板基线、实际应用描述、基线来源和有效保留决定。模板原字节与渲染后基线作为事务材料保存，复用对象去重；普通项目操作仍不得写入 `.yss`。历史基线先从核验过的事务归档读取，其次使用显式 `--base-bundle` 提供的完整旧 Bundle，原字节须匹配登记摘要。`bundle export` 的 `.yss-bundle.snapshot.json` 保存初始与完整变体。材料缺失时标记“基线不可用”，提供双向对照和人工候选，不推测、不联网下载。
+
+selected 分发计算当前基础资源、已安装阶段、Skills 及所选运行时的依赖闭包，更新补装资源、投影和锁；legacy-all 保持既有宽分发。四 Profile 的固定分发政策以 `upgradePolicy` 声明资产类别和迁移规则；规则绑定完整旧模板提交、快照及稳定 ID，并纳入 Bundle 摘要。新增与更新进入计划，删除或改名仅在规则匹配、旧基线可信且未定制时自动规划。改名的目标写入与源删除属于同一事务；目标占用、路径别名或定制进入冲突。没有匹配规则的退役文件明确报告并保留。
+
+`AGENTS.md`、`.gitignore` 等可定制入口未定制时更新，定制时生成三方候选；Skills、投影和治理脚本的固定来源修改进入冲突，不能接受破坏来源锁的任意合并。登记生成资产由生成器重建；Context、Tracker 和项目配置及用户资产保持原样，不兼容时给出单独诊断。既有 Spec、Plan、批准与业务证据不属于升级写范围。旧 metadata 在迁移事务中按原字节归档；Git HEAD/index/gitlink、dirty/untracked 业务工作和原权限受保护。
 
 预演可成功返回包含 `conflicts` 的计划；有冲突的 apply 返回 `CONFLICT`。`INPUT_DRIFT` 要求从当前现场重新规划，`BUNDLE` 要求恢复原计划的固定快照或重新规划。必要资源的 `UNPORTED` 阻断对应升级。负例验证必须检查准确错误码，不能把偶然输入漂移当作冲突、身份或恢复保护通过。
 
-冲突处置先在项目外起草差异，说明保留和合并选择；新增语义决定取得真实用户回复后按授权处理，再从当前输入重新规划。原生不仿制旧 `--resolutions`、`--migrate-layout`、`--prune`、`--archive-dir` 等参数；未支持参数明确拒绝，布局重组、资产清理或人工合并另行形成可审阅范围。不得用 `--force`、reset、clean、stash 或删除状态绕过保护。
+`attach`、`sync` 和 `migrate plan` 共用 `--review-out <项目外新目录>`、`--base-bundle <路径>` 和 `--resolution-file <文件>`。审查包包含原计划、逐项冲突、基线和模板对照、三方候选及空决议模板。决议使用政策允许的 `keep-local`、`use-template` 或 `use-merged`；合并候选必须绑定原字节 SHA-256。干净三方候选也不能直接应用；重叠修改由人或 Agent 完成候选后提交决议。基线不可用时只提供双向对照，不生成假三方基线。
+
+```sh
+yss sync --root ./project --plan --out /review/plan.json --review-out /review/package
+yss sync --root ./project --plan --plan-file /review/plan.json --resolution-file /review/decisions.json --out /review/resolved.json
+yss sync --root ./project --apply --plan-file /review/resolved.json
+```
+
+决议绑定原计划摘要、路径、前后描述、迁移规则及改名目标，`use-merged` 还绑定候选摘要。输入变化使相应决议失效，候选篡改返回 `CANDIDATE_DRIFT`。应用重建完整计划，不能编辑后重签绕过。计划保留 `changes/conflicts/preserved` 摘要，增加 `assets`、`blockers`、`coverage` 和 `readyToApply`；范围内每项资产必须有处理结论。有效保留差异持续显示为例外，必需固定来源仍不兼容时保持阻断。
+
+新增语义决定复用有效授权，缺真实决定才等待。原生不仿制旧 `--resolutions`、`--migrate-layout`、`--prune`、`--archive-dir`；布局重组和范围外资产清理另行安排。不得用 `--force`、reset、clean、stash 或删除状态绕过保护。
 
 ## 事务、恢复与回退
 
 原生事务位于项目专用 `.yss/transactions/`，保存事务计划、持久日志、原字节及权限备份；回执给出 `transactionId`、状态和 `backupPath`。需要仓外长期恢复材料时，按归档清单保存固定二进制、Bundle、来源锁、插件包和完整事务材料，不能把旧执行器的默认外部归档路径写成原生行为。
 
 输入、受管文件、metadata 与 binding 在互斥锁下作为同一事务处理。取消、失败及中断按持久状态恢复；准备阶段中断也从原生恢复入口检查与收敛。恢复前核验身份、范围、日志和备份，不删除损坏或未完成状态制造成功。旧未完成事务由下一节的对应固定旧执行器处理，不交由原生执行器猜测旧日志。
+
+提交完成前运行原生校验，检查计划后置描述、身份、Profile、Context、资源闭包、来源锁、投影和插件 binding。校验失败使用同一事务整体还原，恢复受阻保留现场及证据；不自动执行项目业务测试或创建批准。回执的 `fileApplication` 与 `verification` 分别报告文件应用和验证结果。
 
 回退仅针对最近成功的适用事务；`migrate rollback` 要求最近成功事务为迁移，普通 `rollback --apply` 支持项目事务。恢复原件前先预检全部当前状态及备份；apply 后、首次 rollback 前的用户修改返回 `CONCURRENT` 并保持整个现场。备份损坏、身份或范围不符也阻断写入。成功回退后的重复回退保持幂等，不继续回退更早事务。回退不改变程序安装版本；程序升级使用独立工具根的 `update` 合同。
 

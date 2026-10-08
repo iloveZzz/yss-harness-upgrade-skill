@@ -7,9 +7,9 @@
   "description": "YSS engineering skills for Claude Code.",
   "plugins": [
     {
-      "name": "yss-harness-upgrade",
+      "name": "setup-yss-harness",
       "source": "./",
-      "description": "YSS Go CLI installation, project initialization, sync, migration, and recovery skill.",
+      "description": "Safe YSS CLI installation and environment-aware project harness setup, sync, migration, and recovery.",
       "category": "engineering",
       "keywords": [
         "yss",

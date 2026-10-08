@@ -1,14 +1,15 @@
 {
   "name": "yss-harness-upgrade-skill",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "YSS Harness Upgrade skill for AI coding agents",
+  "description": "Safe YSS CLI installation and project harness setup for AI coding agents",
   "repository": {
     "type": "git",
     "url": "https://github.com/iloveZzz/yss-harness-upgrade-skill"
   },
   "license": "MIT",
   "scripts": {
+    "check": "npm run check-plugin-version && node scripts/check-skill.mjs",
     "changeset": "changeset",
     "version": "changeset version && node scripts/sync-plugin-version.mjs",
     "check-plugin-version": "node scripts/sync-plugin-version.mjs --check"
