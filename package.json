@@ -1,6 +1,6 @@
 {
   "name": "yss-harness-upgrade-skill",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "Safe YSS CLI installation and project harness setup for AI coding agents",
   "repository": {

@@ -36,7 +36,7 @@ claude plugin install setup-yss-harness@iloveZzz
 
 ## 维护
 
-唯一事实源为 [YSS 模板仓库](https://github.com/iloveZzz/yss-spec-project-template) 的 `.agents/skills/setup-yss-harness/`。通过模板的 `scripts/export-yss-skills` 导出便携包，再同步本仓；[来源记录](.yss-skill-source.json)分别保留原文与导出内容的摘要。当前快照来自记录所示的模板工作树，基线提交不能单独代表该内容。
+唯一事实源为 [YSS 模板仓库](https://github.com/iloveZzz/yss-spec-project-template) 的 `.agents/skills/setup-yss-harness/`。通过模板的 `scripts/export-yss-skills` 导出便携包，再同步本仓；[来源记录](.yss-skill-source.json)分别保留原文与导出内容的摘要。当前快照来自来源记录绑定的模板提交；原文与导出文件分别保留摘要。
 
 ```bash
 npm ci

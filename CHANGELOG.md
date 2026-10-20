@@ -1,5 +1,11 @@
 # yss-harness-upgrade-skill
 
+## 2.0.1
+
+### Patch Changes
+
+- 对齐当前 YSS CLI 的 Spec/Backend 身份、显式迁移与恢复语法、程序安装资格和就绪验收；同步固定模板提交的便携技能及来源摘要。
+
 ## 2.0.0
 
 ### Major Changes
