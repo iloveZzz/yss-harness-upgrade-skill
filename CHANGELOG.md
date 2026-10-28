@@ -1,5 +1,11 @@
 # yss-harness-upgrade-skill
 
+## 2.1.0
+
+### Minor Changes
+
+- 增加 Python 标准库环境检查与固定发行包安全引导，默认查询最新正式 CLI 后绑定版本及摘要。对齐 skills/governed 安装、安装方式迁移、CLI 绑定计划和实际结果核查；完善网络诊断、平台资格与宿主发现边界。
+
 ## 2.0.1
 
 ### Patch Changes

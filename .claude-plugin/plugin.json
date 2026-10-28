@@ -1,7 +1,7 @@
 {
   "name": "setup-yss-harness",
-  "version": "2.0.1",
-  "description": "安全安装或升级 YSS CLI，并按工程真实身份初始化、接管、同步或迁移研发治理实例，保护本地定制并验证就绪状态。",
+  "version": "2.1.0",
+  "description": "默认取得最新正式 YSS CLI 并安全引导安装，按环境选择独立技能或完整治理，支持同步、迁移、安装方式转换与就绪核查。",
   "author": {
     "name": "iloveZzz",
     "url": "https://github.com/iloveZzz"

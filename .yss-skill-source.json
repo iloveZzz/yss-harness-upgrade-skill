@@ -2,39 +2,43 @@
   "format_version": 1,
   "source": {
     "repository": "iloveZzz/yss-spec-project-template",
-    "base_commit": "570b4ab2fe15a8137f795491b7680a326e3c5daf",
-    "source_state": "committed",
+    "base_commit": "5f12ca1fde2a6eb0b5e953f808248a976c26d429",
+    "source_state": "working-tree",
     "canonical_root": ".agents/skills/setup-yss-harness",
     "files_sha256": {
-      "SKILL.md": "0a25924c8c8869b119c454aa3ad6c48625b4b8ea90be0f1989590951eb181915",
-      "references/cli-families.md": "ddd420f164982364f903662926cde37e91069f879b3537697d6ad43c99c222c7",
-      "references/operation-contract.md": "ed1db23fea2719623af9af9e7dc7843f63843cd7bc996789d6031b21fd84d5a7",
-      "references/program-installation.md": "e46cd3b47899f627180d6ae8235e9e44a2ab1750e026a34809d73ba37448ee0c",
-      "references/project-operations.md": "7a1154cb8148dc39a3b66022d93ca9affd8b5ce4f20a1a7f2c4d3e6664c6d07b"
+      "SKILL.md": "03c0af1b8a10aeda7a33d4e84c6171bd618b1b8aba374180790875fb2926f1da",
+      "references/cli-families.md": "0bcd9e2231f4f72f461fea15be16926167fc0dfe68c94dc66af7aa09527a9907",
+      "references/operation-contract.md": "1d10a1077353fb9b839fd1bb411e61e4498caa08745e65b01e1603e62595f56b",
+      "references/program-installation.md": "aabfc3c0b4e9c24f686d457cac80d328764c86a6098400a6d3d4d9531ba5d715",
+      "references/project-operations.md": "e4d899db78b9d8fee470caf5c4a695ed2e10faa355c4e75b31c15a5bcb54fcc9",
+      "scripts/bootstrap.py": "c6a7e7decaf1db1239d4a436e35297c74e7c66865a2ce3381f8994e2f7cabdfd"
     },
     "files_mode": {
       "SKILL.md": "0o644",
       "references/cli-families.md": "0o644",
       "references/operation-contract.md": "0o644",
       "references/program-installation.md": "0o644",
-      "references/project-operations.md": "0o644"
+      "references/project-operations.md": "0o644",
+      "scripts/bootstrap.py": "0o644"
     },
-    "aggregate_sha256": "863bf984a7113385d630071d1106724f17dc30316974dc3d38326200551adc3c"
+    "aggregate_sha256": "de60870a3eec0085a281666a186fbf997119e8280ee2b8b5f5f8c25e58c6b818"
   },
   "skill": "setup-yss-harness",
   "files_sha256": {
-    "SKILL.md": "c369624bafb0a10a90df108b37fed70c788b89aeece0a8136d2d3ff015b55eaa",
-    "references/cli-families.md": "ddd420f164982364f903662926cde37e91069f879b3537697d6ad43c99c222c7",
-    "references/operation-contract.md": "ed1db23fea2719623af9af9e7dc7843f63843cd7bc996789d6031b21fd84d5a7",
-    "references/program-installation.md": "e46cd3b47899f627180d6ae8235e9e44a2ab1750e026a34809d73ba37448ee0c",
-    "references/project-operations.md": "7a1154cb8148dc39a3b66022d93ca9affd8b5ce4f20a1a7f2c4d3e6664c6d07b"
+    "SKILL.md": "49576a56007f7f335cb1db84ec950ad496f4531adc46ad99f4a486fd911dd2e4",
+    "references/cli-families.md": "0bcd9e2231f4f72f461fea15be16926167fc0dfe68c94dc66af7aa09527a9907",
+    "references/operation-contract.md": "1d10a1077353fb9b839fd1bb411e61e4498caa08745e65b01e1603e62595f56b",
+    "references/program-installation.md": "aabfc3c0b4e9c24f686d457cac80d328764c86a6098400a6d3d4d9531ba5d715",
+    "references/project-operations.md": "e4d899db78b9d8fee470caf5c4a695ed2e10faa355c4e75b31c15a5bcb54fcc9",
+    "scripts/bootstrap.py": "c6a7e7decaf1db1239d4a436e35297c74e7c66865a2ce3381f8994e2f7cabdfd"
   },
   "files_mode": {
     "SKILL.md": "0o644",
     "references/cli-families.md": "0o644",
     "references/operation-contract.md": "0o644",
     "references/program-installation.md": "0o644",
-    "references/project-operations.md": "0o644"
+    "references/project-operations.md": "0o644",
+    "scripts/bootstrap.py": "0o644"
   },
-  "aggregate_sha256": "f042e6f74b23c779e43a7fbd8395abd5b64deba6c4c76598055988b4439a952a"
+  "aggregate_sha256": "fd65b3d3a3b44f85f0214764aac56eed72c378df997ba739c380edf91457e184"
 }
